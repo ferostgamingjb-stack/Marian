@@ -17,7 +17,7 @@ function showPage(pageName) {
 
   // Update nav active state
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  const navEl = document.getElementById('nav-' + pageName);
+  const navEl = document.getElementById(pageName);
   if (navEl) navEl.classList.add('active');
 
   // Close all dropdowns
