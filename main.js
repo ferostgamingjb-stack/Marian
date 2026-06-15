@@ -10,7 +10,7 @@ function showPage(pageName) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
   // Show target page
-  const target = document.getElementById('page-' + pageName);
+  const target = document.getElementById(pageName);
   if (target) {
     target.classList.add('active');
   }
