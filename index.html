@@ -3274,7 +3274,47 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+function showPage(pageId) {
+    // 1. Önce menüdeki tüm tıklama sorunlarını aşmak için tüm sayfaları/bölümleri bul
+    // Sitenin içinde olabilecek tüm olası bölüm isimlerini buraya yazdık
+    const pages = document.querySelectorAll('section, .page-section, div[id^="page-"], #home, #hakkimizda, #fiyatlar, #clan, #yonetim, #haberler, #medya');
+    
+    pages.forEach(page => {
+        // ID eşleşmesini hem "hakkimizda" hem de "page-hakkimizda" şeklinde kontrol et (Çakışma olmasın)
+        if (page.id === pageId || page.id === 'page-' + pageId) {
+            page.style.display = 'block';
+            page.classList.add('active');
+        } else {
+            page.style.display = 'none';
+            page.classList.remove('active');
+        }
+    });
+
+    // 2. Üst menüdeki butonların hangisinin aktif olduğunu görsel olarak da değiştir
+    const navLinks = document.querySelectorAll('.nav-menu a, .navbar-menu li, .footer-links li, span');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    console.log("Aralone Klan Sitesi - Geçiş Yapılan Sayfa: " + pageId);
+}
+
+// 3. Alt menü ve detaylı sekmeler (Kurallar vb.) için ek koruma fonksiyonu
+function showTab(tabId, subTabId) {
+    showPage(tabId);
+    const subTab = document.getElementById(subTabId) || document.getElementById('page-' + subTabId);
+    if (subTab) {
+        subTab.style.display = 'block';
+        subTab.classList.add('active');
+    }
+}
+
+// Site ilk açıldığında ana sayfa açık gelsin, diğerleri gizlensin
+document.addEventListener("DOMContentLoaded", function() {
+    showPage('home');
+});
+</script>
 <script src="js/background.js"></script>
 
 
